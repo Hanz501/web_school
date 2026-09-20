@@ -194,6 +194,25 @@ class Database extends Config
     {
         parent::__construct();
 
+        if ($host = getenv('DB_HOST')) {
+            $this->default['hostname'] = $host;
+        }
+        if ($db = getenv('DB_DATABASE')) {
+            $this->default['database'] = $db;
+        }
+        if ($user = getenv('DB_USERNAME')) {
+            $this->default['username'] = $user;
+        }
+        if ($pass = getenv('DB_PASSWORD')) {
+            $this->default['password'] = $pass;
+        }
+        if ($port = getenv('DB_PORT')) {
+            $this->default['port'] = (int) $port;
+        }
+        if ($driver = getenv('DB_DRIVER')) {
+            $this->default['DBDriver'] = $driver;
+        }
+
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
         // we don't overwrite live data on accident.
