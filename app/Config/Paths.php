@@ -55,6 +55,13 @@ class Paths
      */
     public string $writableDirectory = __DIR__ . '/../../writable';
 
+    public function __construct()
+    {
+        if (getenv('VERCEL') || isset($_ENV['VERCEL'])) {
+            $this->writableDirectory = '/tmp';
+        }
+    }
+
     /**
      * ---------------------------------------------------------------
      * TESTS DIRECTORY NAME
