@@ -204,8 +204,35 @@ class App extends BaseConfig
     {
         parent::__construct();
 
-        if ($baseURL = getenv('APP_BASE_URL')) {
-            $this->baseURL = $baseURL;
+        $fetchEnv = static function (string $key): ?string {
+            if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+                return (string) $_ENV[$key];
+            }
+            if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') {
+                return (string) $_SERVER[$key];
+            }
+            $val = getenv($key);
+            if ($val !== false && $val !== '') {
+                return (string) $val;
+            }
+            if (function_exists('env')) {
+                $eVal = env($key);
+                if ($eVal !== null && $eVal !== '') {
+                    return (string) $eVal;
+                }
+            }
+            return null;
+        };
+
+        $baseURL = $fetchEnv('APP_BASE_URL') ?: $fetchEnv('app.baseURL');
+
+        if ($baseURL && !str_contains($baseURL, 'localhost')) {
+            $this->baseURL = rtrim(trim($baseURL, "'\" "), '/') . '/';
+        } elseif (isset($_SERVER['HTTP_HOST'])) {
+            $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+            $scheme = $isHttps ? 'https' : 'http';
+            $this->baseURL = $scheme . '://' . $_SERVER['HTTP_HOST'] . '/';
         }
     }
 }
