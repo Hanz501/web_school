@@ -195,4 +195,17 @@ class Cache extends BaseConfig
      * @var list<int>
      */
     public array $cacheStatusCodes = [];
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (getenv('VERCEL') || isset($_ENV['VERCEL'])) {
+            $storePath = '/tmp/cache/';
+            if (!is_dir($storePath)) {
+                @mkdir($storePath, 0777, true);
+            }
+            $this->file['storePath'] = $storePath;
+        }
+    }
 }

@@ -59,6 +59,12 @@ class Paths
     {
         if (getenv('VERCEL') || isset($_ENV['VERCEL'])) {
             $this->writableDirectory = '/tmp';
+            $dirs = ['/tmp/cache', '/tmp/logs', '/tmp/session', '/tmp/uploads', '/tmp/debugbar'];
+            foreach ($dirs as $dir) {
+                if (!is_dir($dir)) {
+                    @mkdir($dir, 0777, true);
+                }
+            }
         }
     }
 
