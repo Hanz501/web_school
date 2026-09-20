@@ -31,7 +31,13 @@ class ProfilModel extends Model
 
     public function getProfil(): array
     {
-        $row = $this->first();
+        $row = null;
+        try {
+            $row = $this->first();
+        } catch (\Throwable $e) {
+            $row = null;
+        }
+
         if (!$row) {
             return [
                 'nama_sekolah'      => 'SMK UNGGULAN PUSAT KEUNGGULAN',

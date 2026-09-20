@@ -38,7 +38,11 @@ class StrukturOrganisasiModel extends Model
 
     public function getAllOrdered(): array
     {
-        return $this->orderBy('urutan', 'ASC')->orderBy('id', 'ASC')->findAll();
+        try {
+            return $this->orderBy('urutan', 'ASC')->orderBy('id', 'ASC')->findAll();
+        } catch (\Throwable $e) {
+            return [];
+        }
     }
 
     public function getGroupedByLevel(): array

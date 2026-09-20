@@ -276,9 +276,9 @@ class Home extends BaseController
             'jurusan'            => !empty($dbJurusan) ? $dbJurusan : $defaultJurusan,
             'berita'             => !empty($dbBerita) ? $dbBerita : $defaultBerita,
             'galeri'             => !empty($dbGaleri) ? $dbGaleri : $defaultGaleri,
-            'profil'             => !empty($dbProfil) ? $dbProfil : (new ProfilModel())->getProfil(),
+            'profil'             => !empty($dbProfil) ? $dbProfil : $profilModel->getProfil(),
             'sejarahList'        => !empty($dbSejarah) ? $dbSejarah : [],
-            'strukturOrganisasi' => !empty($dbStruktur) ? $dbStruktur : (new StrukturOrganisasiModel())->getGroupedByLevel(),
+            'strukturOrganisasi' => !empty($dbStruktur) ? $dbStruktur : $strukturModel->getGroupedByLevel(),
 
             // 3 Floating Metric Cards
             'metrics' => [

@@ -194,32 +194,52 @@ class Database extends Config
     {
         parent::__construct();
 
-        $host = getenv('DB_HOST') ?: getenv('MYSQLHOST') ?: getenv('DATABASE_HOST');
+        $fetchEnv = static function (string $key): ?string {
+            if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+                return (string) $_ENV[$key];
+            }
+            if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') {
+                return (string) $_SERVER[$key];
+            }
+            $val = getenv($key);
+            if ($val !== false && $val !== '') {
+                return (string) $val;
+            }
+            if (function_exists('env')) {
+                $eVal = env($key);
+                if ($eVal !== null && $eVal !== '') {
+                    return (string) $eVal;
+                }
+            }
+            return null;
+        };
+
+        $host = $fetchEnv('DB_HOST') ?: $fetchEnv('MYSQLHOST') ?: $fetchEnv('DATABASE_HOST') ?: $fetchEnv('database.default.hostname');
         if ($host) {
             $this->default['hostname'] = trim($host, "'\" ");
         }
 
-        $db = getenv('DB_DATABASE') ?: getenv('MYSQLDATABASE') ?: getenv('DATABASE_NAME');
+        $db = $fetchEnv('DB_DATABASE') ?: $fetchEnv('MYSQLDATABASE') ?: $fetchEnv('DATABASE_NAME') ?: $fetchEnv('database.default.database');
         if ($db) {
             $this->default['database'] = trim($db, "'\" ");
         }
 
-        $user = getenv('DB_USERNAME') ?: getenv('MYSQLUSER') ?: getenv('DATABASE_USER');
+        $user = $fetchEnv('DB_USERNAME') ?: $fetchEnv('MYSQLUSER') ?: $fetchEnv('DATABASE_USER') ?: $fetchEnv('database.default.username');
         if ($user) {
             $this->default['username'] = trim($user, "'\" ");
         }
 
-        $pass = getenv('DB_PASSWORD') ?: getenv('MYSQLPASSWORD') ?: getenv('DATABASE_PASSWORD');
-        if ($pass !== false && $pass !== null) {
+        $pass = $fetchEnv('DB_PASSWORD') ?? $fetchEnv('MYSQLPASSWORD') ?? $fetchEnv('DATABASE_PASSWORD') ?? $fetchEnv('database.default.password');
+        if ($pass !== null) {
             $this->default['password'] = trim($pass, "'\" ");
         }
 
-        $port = getenv('DB_PORT') ?: getenv('MYSQLPORT') ?: getenv('DATABASE_PORT');
+        $port = $fetchEnv('DB_PORT') ?: $fetchEnv('MYSQLPORT') ?: $fetchEnv('DATABASE_PORT') ?: $fetchEnv('database.default.port');
         if ($port) {
             $this->default['port'] = (int) trim($port, "'\" ");
         }
 
-        $driver = getenv('DB_DRIVER') ?: getenv('DATABASE_DRIVER');
+        $driver = $fetchEnv('DB_DRIVER') ?: $fetchEnv('DATABASE_DRIVER') ?: $fetchEnv('database.default.DBDriver');
         if ($driver) {
             $this->default['DBDriver'] = trim($driver, "'\" ");
         }
