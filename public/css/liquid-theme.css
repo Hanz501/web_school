@@ -1,0 +1,484 @@
+/**
+ * ============================================================================
+ * SMK UNGGULAN - WARM LIGHT LIQUID GLASS DESIGN SYSTEM
+ * Theme: Warm Light anti-silau (#FFF8F6, #F9F2F0, #DFD9D7), Rich Amber (#B45309), 
+ * Terracotta (#C26727), Soft Emerald (#059669) & Liquid Frosted Glass
+ * ============================================================================
+ */
+
+:root {
+  /* Warm Light Backgrounds */
+  --bg-warm-100: #FFF8F6;
+  --bg-warm-200: #F9F2F0;
+  --bg-warm-300: #DFD9D7;
+  
+  /* Frosted Glass Surfaces */
+  --bg-glass: rgba(255, 248, 246, 0.75);
+  --bg-glass-card: rgba(255, 255, 255, 0.85);
+  --bg-glass-elevated: rgba(255, 255, 255, 0.92);
+  --bg-glass-hover: rgba(255, 255, 255, 0.96);
+  
+  /* Borders */
+  --border-amber-subtle: rgba(180, 83, 9, 0.12);
+  --border-stone-subtle: rgba(68, 64, 60, 0.08);
+  --border-glass-highlight: rgba(255, 255, 255, 0.9);
+  --border-amber-active: rgba(180, 83, 9, 0.4);
+
+  /* Palet Warna */
+  --primary-amber: #B45309;
+  --primary-amber-hover: #92400E;
+  --secondary-terracotta: #C26727;
+  --status-emerald: #059669;
+  --status-emerald-bg: rgba(5, 150, 105, 0.1);
+
+  /* Typography Colors */
+  --text-headline: #1C1917;
+  --text-body-dark: #57534E;
+  --text-body-muted: #78716C;
+
+  /* Ambient Diffused Shadows */
+  --shadow-warm-soft: 0 10px 30px -10px rgba(120, 53, 15, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-warm-elevated: 0 16px 36px -8px rgba(120, 53, 15, 0.1), 0 6px 12px -2px rgba(0, 0, 0, 0.03);
+  --shadow-amber-glow: 0 8px 24px -4px rgba(180, 83, 9, 0.35);
+  --shadow-node-active: 0 0 28px rgba(217, 119, 6, 0.45), 0 0 0 4px rgba(254, 215, 170, 0.6);
+
+  /* Font Families */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-warm-100);
+  color: var(--text-headline);
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-warm-100);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(254, 243, 199, 0.45) 0%, transparent 40%),
+    radial-gradient(circle at 85% 45%, rgba(255, 237, 213, 0.4) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(254, 240, 235, 0.5) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-warm-200);
+}
+::-webkit-scrollbar-thumb {
+  background: #D7CCC8;
+  border-radius: 9999px;
+  border: 2px solid var(--bg-warm-200);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-amber);
+}
+
+/* ============================================================================
+   WARM LIGHT LIQUID GLASS UTILITY CLASSES
+   ============================================================================ */
+
+.liquid-glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-amber-subtle);
+  box-shadow: var(--shadow-warm-soft);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass:hover {
+  background: var(--bg-glass-card);
+  border-color: var(--border-amber-active);
+  box-shadow: var(--shadow-warm-elevated);
+}
+
+.liquid-glass-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-amber-subtle);
+  box-shadow: var(--shadow-warm-soft);
+}
+
+.liquid-glass-elevated {
+  background: var(--bg-glass-elevated);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-warm-elevated);
+}
+
+.liquid-glass-pill {
+  background: rgba(255, 248, 246, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-amber-subtle);
+  box-shadow: 0 2px 8px rgba(120, 53, 15, 0.04);
+}
+
+/* Gallery Card Smooth Transition without Border Blink */
+.galeri-card-item {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.22s ease, 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Buttons */
+.btn-amber-solid {
+  background-color: var(--primary-amber);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.28);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-amber-solid:hover {
+  background-color: var(--primary-amber-hover);
+  box-shadow: 0 8px 22px rgba(180, 83, 9, 0.38);
+  transform: translateY(-2px);
+}
+.btn-amber-solid:active {
+  transform: translateY(0);
+}
+
+.btn-amber-gradient {
+  background: linear-gradient(135deg, #B45309 0%, #D97706 50%, #92400E 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.28);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-amber-gradient:hover {
+  background: linear-gradient(135deg, #92400E 0%, #B45309 50%, #78350F 100%);
+  box-shadow: 0 8px 24px rgba(180, 83, 9, 0.4);
+  transform: translateY(-2px);
+}
+.btn-amber-gradient:active {
+  transform: translateY(0);
+}
+
+.btn-outline-warm {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-headline);
+  border: 1px solid var(--border-amber-subtle);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-outline-warm:hover {
+  background: #FFFFFF;
+  border-color: var(--primary-amber);
+  color: var(--primary-amber);
+  box-shadow: var(--shadow-warm-soft);
+  transform: translateY(-1px);
+}
+
+/* ============================================================================
+   SECTION RODA INTERAKTIF 4 PROGRAM KEAHLIAN (PRESISI TINGGI)
+   ============================================================================ */
+
+#orbit-wheel-container {
+  perspective: 1000px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout;
+}
+
+.orbit-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px dashed rgba(180, 83, 9, 0.25);
+  pointer-events: none;
+}
+
+.orbit-track-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0) 70%);
+  pointer-events: none;
+}
+
+/* Rotating Arc Carrier (Garis yang muter mengelilingi jalur lingkaran penanda) */
+.orbit-arc-carrier {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-origin: center center;
+  transition: transform 0.75s cubic-bezier(0.34, 1.35, 0.64, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  z-index: 15;
+}
+
+.orbit-traveling-arc {
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 32px;
+  filter: drop-shadow(0 2px 10px rgba(180, 83, 9, 0.85)) drop-shadow(0 0 16px rgba(245, 158, 11, 0.7));
+  animation: travelArcGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes travelArcGlow {
+  0% { filter: drop-shadow(0 2px 6px rgba(180, 83, 9, 0.65)) drop-shadow(0 0 12px rgba(245, 158, 11, 0.5)); opacity: 0.95; }
+  100% { filter: drop-shadow(0 3px 14px rgba(217, 119, 6, 0.95)) drop-shadow(0 0 22px rgba(245, 158, 11, 0.85)); opacity: 1; }
+}
+
+/* Center Dynamic Hub */
+.orbit-center-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 128px;
+  height: 128px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #FFF8F6 60%, #FEF3C7 100%);
+  border: 2px solid rgba(180, 83, 9, 0.25);
+  box-shadow: 0 10px 28px rgba(120, 53, 15, 0.12), inset 0 2px 6px rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  text-align: center;
+  transition: all 0.35s ease;
+}
+
+/* 4 Fixed Stationary Nodes */
+.orbit-node {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  margin-left: -31px;
+  margin-top: -31px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(180, 83, 9, 0.2);
+  box-shadow: 0 4px 14px rgba(120, 53, 15, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  z-index: 20;
+}
+
+.orbit-node:hover {
+  transform: scale(1.08);
+  border-color: var(--primary-amber);
+  box-shadow: 0 0 18px rgba(217, 119, 6, 0.3);
+}
+
+.orbit-node.is-active {
+  background: #FFFFFF;
+  border: 2.5px solid #B45309;
+  box-shadow: var(--shadow-node-active);
+  transform: scale(1.14);
+}
+
+.orbit-node.is-active .node-icon-wrapper svg {
+  color: #B45309 !important;
+}
+
+/* Capsule Label Pill under each Node */
+.orbit-node .node-pill-label {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1px 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(180, 83, 9, 0.18);
+  color: #57534E;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.orbit-node.is-active .node-pill-label {
+  bottom: -26px;
+  background: #FEF3C7;
+  border-color: #B45309;
+  color: #B45309;
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.18);
+}
+
+/* Detail Panel Morph Animations */
+.morph-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.morph-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.morph-exit {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* ============================================================================
+   MODALS (BERITA & GOOGLE MAPS)
+   ============================================================================ */
+
+.modal-backdrop {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  opacity: 0;
+  transform: scale(0.95) translateY(12px);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.is-open .modal-dialog {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Telemetry Indicator Blinking */
+.telemetry-dot-ping {
+  animation: telemetryBlink 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes telemetryBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* Subtle Shimmer */
+.shimmer-text {
+  background: linear-gradient(90deg, #B45309 0%, #C26727 50%, #B45309 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmerFlow 5s linear infinite;
+}
+
+@keyframes shimmerFlow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* No scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================================================
+   LUMINOUS RIGHT-TO-LEFT LIGHT SWEEP (PANTULAN CAHAYA BERGERAK PELAN)
+   ============================================================================ */
+
+.hero-text-shimmer {
+  background: linear-gradient(
+    -75deg,
+    #1C1917 0%,
+    #1C1917 35%,
+    #b45309 43%,
+    #f59e0b 48%,
+    #ffffff 50%,
+    #f59e0b 52%,
+    #b45309 57%,
+    #1C1917 65%,
+    #1C1917 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #1C1917;
+  animation: light-sweep-rtl 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  display: inline;
+}
+
+.hero-accent-shimmer {
+  background: linear-gradient(
+    -75deg,
+    #B45309 0%,
+    #B45309 35%,
+    #d97706 43%,
+    #fbbf24 48%,
+    #ffffff 50%,
+    #fbbf24 52%,
+    #d97706 57%,
+    #B45309 65%,
+    #B45309 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #B45309;
+  animation: light-sweep-rtl 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  display: inline;
+}
+
+.hero-sub-shimmer {
+  background: linear-gradient(
+    -75deg,
+    #57534E 0%,
+    #57534E 35%,
+    #92400e 43%,
+    #d97706 48%,
+    #ffffff 50%,
+    #d97706 52%,
+    #92400e 57%,
+    #57534E 65%,
+    #57534E 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #57534E;
+  animation: light-sweep-rtl 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 1.2s;
+  display: inline;
+}
+
+@keyframes light-sweep-rtl {
+  0% {
+    background-position: 250% center;
+  }
+  100% {
+    background-position: -250% center;
+  }
+}
