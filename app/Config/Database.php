@@ -194,23 +194,34 @@ class Database extends Config
     {
         parent::__construct();
 
-        if ($host = getenv('DB_HOST')) {
-            $this->default['hostname'] = $host;
+        $host = getenv('DB_HOST') ?: getenv('MYSQLHOST') ?: getenv('DATABASE_HOST');
+        if ($host) {
+            $this->default['hostname'] = trim($host, "'\" ");
         }
-        if ($db = getenv('DB_DATABASE')) {
-            $this->default['database'] = $db;
+
+        $db = getenv('DB_DATABASE') ?: getenv('MYSQLDATABASE') ?: getenv('DATABASE_NAME');
+        if ($db) {
+            $this->default['database'] = trim($db, "'\" ");
         }
-        if ($user = getenv('DB_USERNAME')) {
-            $this->default['username'] = $user;
+
+        $user = getenv('DB_USERNAME') ?: getenv('MYSQLUSER') ?: getenv('DATABASE_USER');
+        if ($user) {
+            $this->default['username'] = trim($user, "'\" ");
         }
-        if ($pass = getenv('DB_PASSWORD')) {
-            $this->default['password'] = $pass;
+
+        $pass = getenv('DB_PASSWORD') ?: getenv('MYSQLPASSWORD') ?: getenv('DATABASE_PASSWORD');
+        if ($pass !== false && $pass !== null) {
+            $this->default['password'] = trim($pass, "'\" ");
         }
-        if ($port = getenv('DB_PORT')) {
-            $this->default['port'] = (int) $port;
+
+        $port = getenv('DB_PORT') ?: getenv('MYSQLPORT') ?: getenv('DATABASE_PORT');
+        if ($port) {
+            $this->default['port'] = (int) trim($port, "'\" ");
         }
-        if ($driver = getenv('DB_DRIVER')) {
-            $this->default['DBDriver'] = $driver;
+
+        $driver = getenv('DB_DRIVER') ?: getenv('DATABASE_DRIVER');
+        if ($driver) {
+            $this->default['DBDriver'] = trim($driver, "'\" ");
         }
 
         // Ensure that we always set the database group to 'tests' if
